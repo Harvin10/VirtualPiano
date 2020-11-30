@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Play Piano Free</title>
+</head>
+<body>
+    <div class="container">
+        <div data-key="65" class="key">
+            <p class="keyboard">A</p>
+            <p class="piano">Do</p>
+        </div>
+        <div data-key="83" class="key">
+            <p class="keyboard">S</p>
+            <p class="piano">Re</p>
+        </div>
+        <div data-key="68" class="key">
+            <p class="keyboard">D</p>
+            <p class="piano">Mi</p>
+        </div>
+        <div data-key="70" class="key">
+            <p class="keyboard">F</p>
+            <p class="piano">Fa</p>
+        </div>
+        <div data-key="71" class="key">
+            <p class="keyboard">G</p>
+            <p class="piano">Sol</p>
+        </div>
+        <div data-key="72" class="key">
+            <p class="keyboard">H</p>
+            <p class="piano">La</p>
+        </div>
+        <div data-key="74" class="key">
+            <p class="keyboard">J</p>
+            <p class="piano">Si</p>
+        </div>
+        <div data-key="75" class="key">
+            <p class="keyboard">K</p>
+            <p class="piano">Do</p>
+        </div>
+    </div>
+
+    <audio data-key="65" src="audio/1. do.m4a"></audio>
+    <audio data-key="83" src="audio/2. re.m4a"></audio>
+    <audio data-key="68" src="audio/3. mi.m4a"></audio>
+    <audio data-key="70" src="audio/4. fa.m4a"></audio>
+    <audio data-key="71" src="audio/5. sol.m4a"></audio>
+    <audio data-key="72" src="audio/6. la.m4a"></audio>
+    <audio data-key="74" src="audio/7. si.m4a"></audio>
+    <audio data-key="75" src="audio/8. do octave.m4a"></audio>
+
+    <script>
+        function playAudio(event) {
+            let key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
+            let audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+            if(!audio) return;
+            audio.currentTime = 0;
+            audio.play();
+            key.classList.add("playing");
+        }
+
+        function stopTransition(event) {
+            if(event.propertyName !== "transform") return;
+            this.classList.remove("playing");
+        }
+
+        window.addEventListener("keydown", playAudio);
+
+        const keys = document.querySelectorAll(".key");
+        keys.forEach(key => key.addEventListener("transitionend", stopTransition));
+    </script>
+</body>
+</html>
