@@ -66,10 +66,31 @@
             this.classList.remove("playing");
         }
 
+        function darkMode(event) {
+            let body = document.querySelector("body");
+            let key = document.querySelectorAll(".key");
+            let keyboard = document.querySelectorAll(".keyboard");
+            let piano =document.querySelectorAll(".piano");
+            if(body.classList.contains("body-dark") == false) {
+                body.classList.add("body-dark");
+                key.forEach(key => key.classList.add("key-dark"));
+                keyboard.forEach(key => key.classList.add("keyboard-dark"));
+                piano.forEach(key => key.classList.add("piano-dark"));
+            }
+            else {
+                body.classList.remove("body-dark");
+                key.forEach(key => key.classList.remove("key-dark"));
+                keyboard.forEach(key => key.classList.remove("keyboard-dark"));
+                piano.forEach(key => key.classList.remove("piano-dark"));
+            }
+        }
+
         window.addEventListener("keydown", playAudio);
 
         const keys = document.querySelectorAll(".key");
         keys.forEach(key => key.addEventListener("transitionend", stopTransition));
+
+        window.addEventListener("click", darkMode);
     </script>
 </body>
 </html>
